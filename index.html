@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glam Attire | Luxury Fashion Store</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#080808;
+    color:#fff;
+}
+
+header{
+    background:#050505;
+    border-bottom:1px solid #c9a227;
+    padding:18px 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    color:#d4af37;
+    font-size:28px;
+    font-weight:bold;
+}
+
+nav a{
+    color:#fff;
+    text-decoration:none;
+    margin-left:25px;
+    cursor:pointer;
+}
+
+nav a:hover{
+    color:#d4af37;
+}
+
+.hero{
+    min-height:500px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:60px 20px;
+    background:
+    linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.8)),
+    radial-gradient(circle at center,#3a2b00,#050505 65%);
+}
+
+.hero h1{
+    font-size:55px;
+    color:#d4af37;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:20px;
+    color:#ddd;
+    margin-bottom:30px;
+}
+
+.btn{
+    background:#d4af37;
+    color:#000;
+    border:none;
+    padding:13px 22px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btn:hover{
+    background:#fff;
+}
+
+.container{
+    width:90%;
+    max-width:1250px;
+    margin:auto;
+}
+
+.section{
+    padding:50px 0;
+}
+
+.section-title{
+    text-align:center;
+    color:#d4af37;
+    font-size:34px;
+    margin-bottom:30px;
+}
+
+.filters{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:25px;
+}
+
+.filters button{
+    background:#111;
+    border:1px solid #d4af37;
+    color:#fff;
+    padding:10px 18px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.filters button:hover{
+    background:#d4af37;
+    color:#000;
+}
+
+.search{
+    width:100%;
+    padding:14px;
+    background:#111;
+    color:white;
+    border:1px solid #444;
+    border-radius:6px;
+    margin-bottom:20px;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:22px;
+}
+
+.product{
+    background:#111;
+    border:1px solid #292929;
+    border-radius:10px;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.product:hover{
+    transform:translateY(-5px);
+    border-color:#d4af37;
+}
+
+.product img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    background:#222;
+}
+
+.product-info{
+    padding:17px;
+}
+
+.product-info h3{
+    color:#fff;
+    margin-bottom:8px;
+}
+
+.price{
+    color:#d4af37;
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.cart{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#d4af37;
+    color:#000;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    cursor:pointer;
+    z-index:2000;
+    box-shadow:0 5px 20px #000;
+}
+
+.badge{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    background:red;
+    color:white;
+    width:23px;
+    height:23px;
+    border-radius:50%;
+    font-size:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.8);
+    z-index:3000;
+    overflow:auto;
+    padding:30px 15px;
+}
+
+.modal-box{
+    background:#111;
+    border:1px solid #d4af37;
+    max-width:700px;
+    margin:30px auto;
+    border-radius:10px;
+    padding:25px;
+}
+
+.close{
+    float:right;
+    color:#d4af37;
+    font-size:28px;
+    cursor:pointer;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:6px;
+    color:#ddd;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+    width:100%;
+    padding:12px;
+    background:#080808;
+    color:#fff;
+    border:1px solid #444;
+    border-radius:5px;
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    border-bottom:1px solid #333;
+    padding:15px 0;
+}
+
+.qty button{
+    padding:5px 10px;
+    background:#d4af37;
+    border:none;
+    cursor:pointer;
+}
+
+.admin{
+    display:none;
+}
+
+.admin-box{
+    background:#111;
+    border:1px solid #333;
+    padding:20px;
+    border-radius:8px;
+    margin-bottom:20px;
+}
+
+.admin-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+
+.stat{
+    background:#181818;
+    padding:20px;
+    border-left:3px solid #d4af37;
+}
+
+.stat h3{
+    color:#aaa;
+    margin-bottom:8px;
+}
+
+.stat strong{
+    color:#d4af37;
+    font-size:25px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+th,td{
+    border:1px solid #333;
+    padding:10px;
+    text-align:left;
+}
+
+th{
+    color:#d4af37;
+}
+
+footer{
+    border-top:1px solid #333;
+    padding:30px;
+    text-align:center;
+    color:#aaa;
+    margin-top:50px;
+}
+
+footer strong{
+    color:#d4af37;
+}
+
+@media(max-width:700px){
+    header{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav a{
+        margin:0 7px;
+        font-size:14px;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .cart-item{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    table{
+        font-size:12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">GLAM ATTIRE</div>
+
+    <nav>
+        <a onclick="scrollToStore()">Shop</a>
+        <a onclick="openCart()">Cart</a>
+        <a onclick="openAdminLogin()">Admin</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div>
+        <h1>GLAM ATTIRE</h1>
+        <p>Luxury Fashion • Modern Style • Timeless Elegance</p>
+        <button class="btn" onclick="scrollToStore()">SHOP NOW</button>
+    </div>
+</section>
+
+<section class="section" id="store">
+<div class="container">
+
+<h2 class="section-title">Our Collection</h2>
+
+<input
+    type="text"
+    id="search"
+    class="search"
+    placeholder="Search products..."
+    oninput="renderProducts()"
+>
+
+<div class="filters">
+    <button onclick="setCategory('All')">All</button>
+    <button onclick="setCategory('Men')">Men</button>
+    <button onclick="setCategory('Women')">Women</button>
+    <button onclick="setCategory('Shoes')">Shoes</button>
+    <button onclick="setCategory('Accessories')">Accessories</button>
+</div>
+
+<div class="products" id="products"></div>
+
+</div>
+</section>
+
+<footer>
+    <p>© 2026 <strong>Glam Attire</strong>. All Rights Reserved.</p>
+    <p>Email: mirzawaqar4040@gmail.com</p>
+    <p>WhatsApp: 03105565390</p>
+</footer>
+
+<div class="cart" onclick="openCart()">
+    🛒
+    <span class="badge" id="cartCount">0</span>
+</div>
+
+<!-- CART MODAL -->
+
+<div class="modal" id="cartModal">
+<div class="modal-box">
+
+<span class="close" onclick="closeModal('cartModal')">&times;</span>
+
+<h2 class="section-title">Your Cart</h2>
+
+<div id="cartItems"></div>
+
+<hr style="border-color:#333;margin:20px 0">
+
+<h3>Total: <span id="cartTotal" style="color:#d4af37">Rs 0</span></h3>
+
+<br>
+
+<button class="btn" onclick="openCheckout()">Proceed to Checkout</button>
+
+</div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+
+<div class="modal" id="checkoutModal">
+<div class="modal-box">
+
+<span class="close" onclick="closeModal('checkoutModal')">&times;</span>
+
+<h2 class="section-title">Checkout</h2>
+
+<div class="form-group">
+<label>Full Name *</label>
+<input id="customerName" type="text">
+</div>
+
+<div class="form-group">
+<label>Primary Phone *</label>
+<input id="customerPhone" type="tel">
+</div>
+
+<div class="form-group">
+<label>Alternate Phone</label>
+<input id="customerPhone2" type="tel">
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input id="customerEmail" type="email">
+</div>
+
+<div class="form-group">
+<label>City *</label>
+<input id="customerCity" type="text">
+</div>
+
+<div class="form-group">
+<label>Postal Code</label>
+<input id="postalCode" type="text">
+</div>
+
+<div class="form-group">
+<label>Complete Delivery Address *</label>
+<textarea id="customerAddress"></textarea>
+</div>
+
+<div class="form-group">
+<label>Payment Method</label>
+<select id="paymentMethod">
+    <option>Cash on Delivery</option>
+    <option>Bank Transfer</option>
+    <option>EasyPaisa</option>
+    <option>JazzCash</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Order Note</label>
+<textarea id="orderNote"></textarea>
+</div>
+
+<button class="btn" onclick="placeOrder()">PLACE ORDER</button>
+
+</div>
+</div>
+
+<!-- ADMIN LOGIN -->
+
+<div class="modal" id="adminLoginModal">
+<div class="modal-box">
+
+<span class="close" onclick="closeModal('adminLoginModal')">&times;</span>
+
+<h2 class="section-title">Admin Login</h2>
+
+<div class="form-group">
+<label>Username</label>
+<input id="adminUsername">
+</div>
+
+<div class="form-group">
+<label>Password</label>
+<input id="adminPassword" type="password">
+</div>
+
+<button class="btn" onclick="adminLogin()">LOGIN</button>
+
+<p id="loginError" style="color:red;margin-top:15px"></p>
+
+</div>
+</div>
+
+<!-- ADMIN PANEL -->
+
+<div class="modal" id="adminModal">
+<div class="modal-box" style="max-width:1100px">
+
+<span class="close" onclick="closeModal('adminModal')">&times;</span>
+
+<h2 class="section-title">Glam Attire Admin Panel</h2>
+
+<div class="admin-grid">
+
+<div class="stat">
+<h3>Products</h3>
+<strong id="statProducts">0</strong>
+</div>
+
+<div class="stat">
+<h3>Orders</h3>
+<strong id="statOrders">0</strong>
+</div>
+
+<div class="stat">
+<h3>Sales</h3>
+<strong id="statSales">Rs 0</strong>
+</div>
+
+</div>
+
+<br>
+
+<div class="admin-box">
+
+<h3 style="color:#d4af37">Add / Edit Product</h3>
+
+<br>
+
+<input type="hidden" id="editProductId">
+
+<div class="admin-grid">
+
+<div class="form-group">
+<label>Product Name</label>
+<input id="productName">
+</div>
+
+<div class="form-group">
+<label>Price</label>
+<input id="productPrice" type="number">
+</div>
+
+<div class="form-group">
+<label>Category</label>
+<select id="productCategory">
+<option>Men</option>
+<option>Women</option>
+<option>Shoes</option>
+<option>Accessories</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Stock</label>
+<input id="productStock" type="number" value="10">
+</div>
+
+</div>
+
+<div class="form-group">
+<label>Image URL</label>
+<input id="productImage" placeholder="https://...">
+</div>
+
+<div class="form-group">
+<label>Description</label>
+<textarea id="productDescription"></textarea>
+</div>
+
+<button class="btn" onclick="saveProduct()">SAVE PRODUCT</button>
+<button class="btn" onclick="clearProductForm()">CLEAR</button>
+
+</div>
+
+<div class="admin-box">
+
+<h3 style="color:#d4af37">Products Management</h3>
+
+<div style="overflow:auto">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Category</th>
+<th>Price</th>
+<th>Stock</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="adminProducts"></tbody>
+</table>
+</div>
+
+</div>
+
+<div class="admin-box">
+
+<h3 style="color:#d4af37">Orders Management</h3>
+
+<div style="overflow:auto">
+
+<table>
+
+<thead>
+<tr>
+<th>Order ID</th>
+<th>Customer</th>
+<th>Phone</th>
+<th>City</th>
+<th>Total</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="adminOrders"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<button class="btn" onclick="adminLogout()">LOGOUT</button>
+
+</div>
+</div>
+
+<script>
+
+const WHATSAPP_NUMBER="923105565390";
+
+const ADMIN_USERNAME="admin";
+const ADMIN_PASSWORD="Glam@2026";
+
+let products=JSON.parse(localStorage.getItem("glamProducts")) || [];
+
+let orders=JSON.parse(localStorage.getItem("glamOrders")) || [];
+
+let cart=JSON.parse(localStorage.getItem("glamCart")) || [];
+
+let currentCategory="All";
+
+function saveData(){
+    localStorage.setItem("glamProducts",JSON.stringify(products));
+    localStorage.setItem("glamOrders",JSON.stringify(orders));
+    localStorage.setItem("glamCart",JSON.stringify(cart));
+}
+
+function createDemoProducts(){
+
+if(products.length>0)return;
+
+products=[
+{
+id:Date.now()+1,
+name:"Luxury Black Suit",
+price:12500,
+category:"Men",
+stock:10,
+image:"https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&w=800&q=80",
+description:"Premium luxury black suit."
+},
+{
+id:Date.now()+2,
+name:"Elegant Women Dress",
+price:9800,
+category:"Women",
+stock:10,
+image:"https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80",
+description:"Elegant fashion dress."
+},
+{
+id:Date.now()+3,
+name:"Premium Sneakers",
+price:7500,
+category:"Shoes",
+stock:15,
+image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+description:"Premium sneakers."
+},
+{
+id:Date.now()+4,
+name:"Luxury Watch",
+price:15500,
+category:"Accessories",
+stock:8,
+image:"https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80",
+description:"Luxury wrist watch."
+}
+];
+
+saveData();
+
+}
+
+function renderProducts(){
+
+let box=document.getElementById("products");
+
+let search=document.getElementById("search").value.toLowerCase();
+
+let list=products.filter(p=>{
+
+let categoryMatch=currentCategory==="All" || p.category===currentCategory;
+
+let searchMatch=p.name.toLowerCase().includes(search);
+
+return categoryMatch && searchMatch;
+
+});
+
+if(list.length===0){
+
+box.innerHTML="<p style='color:#aaa'>No products found.</p>";
+
+return;
+
+}
+
+box.innerHTML=list.map(p=>`
+
+<div class="product">
+
+<img src="${p.image || 'https://via.placeholder.com/600x500?text=Glam+Attire'}">
+
+<div class="product-info">
+
+<h3>${escapeHtml(p.name)}</h3>
+
+<p style="color:#aaa;margin-bottom:8px">
+${escapeHtml(p.description || "")}
+</p>
+
+<div class="price">Rs ${Number(p.price).toLocaleString()}</div>
+
+<p style="color:#aaa;margin-bottom:12px">
+Stock: ${p.stock}
+</p>
+
+<button class="btn" onclick="addToCart(${p.id})"
+${p.stock<=0?'disabled':''}>
+Add to Cart
+</button>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+function setCategory(category){
+
+currentCategory=category;
+
+renderProducts();
+
+}
+
+function addToCart(id){
+
+let product=products.find(p=>p.id===id);
+
+if(!product)return;
+
+if(product.stock<=0){
+
+alert("This product is out of stock.");
+
+return;
+
+}
+
+let item=cart.find(x=>x.id===id);
+
+if(item){
+
+if(item.qty>=product.stock){
+
+alert("Stock limit reached.");
+
+return;
+
+}
+
+item.qty++;
+
+}else{
+
+cart.push({
+id:id,
+qty:1
+});
+
+}
+
+saveData();
+
+updateCartCount();
+
+alert("Product added to cart!");
+
+}
+
+function updateCartCount(){
+
+let count=cart.reduce((sum,item)=>sum+item.qty,0);
+
+document.getElementById("cartCount").textContent=count;
+
+}
+
+function openCart(){
+
+document.getElementById("cartModal").style.display="block";
+
+renderCart();
+
+}
+
+function renderCart(){
+
+let box=document.getElementById("cartItems");
+
+if(cart.length===0){
+
+box.innerHTML="<p>Your cart is empty.</p>";
+
+document.getElementById("cartTotal").textContent="Rs 0";
+
+return;
+
+}
+
+let total=0;
+
+box.innerHTML=cart.map(item=>{
+
+let p=products.find(x=>x.id===item.id);
+
+if(!p)return "";
+
+let subtotal=p.price*item.qty;
+
+total+=subtotal;
+
+return `
+
+<div class="cart-item">
+
+<div>
+
+<strong>${escapeHtml(p.name)}</strong>
+
+<p style="color:#d4af37">
+Rs ${p.price.toLocaleString()}
+</p>
+
+</div>
+
+<div class="qty">
+
+<button onclick="changeQty(${p.id},-1)">−</button>
+
+<span style="padding:0 10px">${item.qty}</span>
+
+<button onclick="changeQty(${p.id},1)">+</button>
+
+</div>
+
+<div>
+Rs ${subtotal.toLocaleString()}
+</div>
+
+<button class="btn" onclick="removeCart(${p.id})">
+Remove
+</button>
+
+</div>
+
+`;
+
+}).join("");
+
+document.getElementById("cartTotal").textContent=
+"Rs "+total.toLocaleString();
+
+}
+
+function changeQty(id,amount){
+
+let item=cart.find(x=>x.id===id);
+
+let product=products.find(x=>x.id===id);
+
+if(!item || !product)return;
+
+item.qty+=amount;
+
+if(item.qty<=0){
+
+cart=cart.filter(x=>x.id!==id);
+
+}
+
+if(item.qty>product.stock){
+
+item.qty=product.stock;
+
+}
+
+saveData();
+
+updateCartCount();
+
+renderCart();
+
+}
+
+function removeCart(id){
+
+cart=cart.filter(x=>x.id!==id);
+
+saveData();
+
+updateCartCount();
+
+renderCart();
+
+}
+
+function getCartTotal(){
+
+return cart.reduce((total,item)=>{
+
+let p=products.find(x=>x.id===item.id);
+
+return total+(p?p.price*item.qty:0);
+
+},0);
+
+}
+
+function openCheckout(){
+
+if(cart.length===0){
+
+alert("Your cart is empty.");
+
+return;
+
+}
+
+closeModal("cartModal");
+
+document.getElementById("checkoutModal").style.display="block";
+
+}
+
+function placeOrder(){
+
+let name=document.getElementById("customerName").value.trim();
+
+let phone=document.getElementById("customerPhone").value.trim();
+
+let phone2=document.getElementById("customerPhone2").value.trim();
+
+let email=document.getElementById("customerEmail").value.trim();
+
+let city=document.getElementById("customerCity").value.trim();
+
+let postal=document.getElementById("postalCode").value.trim();
+
+let address=document.getElementById("customerAddress").value.trim();
+
+let payment=document.getElementById("paymentMethod").value;
+
+let note=document.getElementById("orderNote").value.trim();
+
+if(!name || !phone || !city || !address){
+
+alert("Please fill all required fields.");
+
+return;
+
+}
+
+let orderId="GA-"+Date.now();
+
+let items=cart.map(item=>{
+
+let p=products.find(x=>x.id===item.id);
+
+return {
+
+productId:p.id,
+
+name:p.name,
+
+price:p.price,
+
+qty:item.qty,
+
+subtotal:p.price*item.qty
+
+};
+
+});
+
+let total=items.reduce((sum,item)=>sum+item.subtotal,0);
+
+let order={
+
+id:orderId,
+
+date:new Date().toLocaleString(),
+
+customer:{
+
+name,
+
+phone,
+
+phone2,
+
+email,
+
+city,
+
+postal,
+
+address
+
+},
+
+payment,
+
+note,
+
+items,
+
+total,
+
+status:"Pending"
+
+};
+
+orders.unshift(order);
+
+items.forEach(item=>{
+
+let p=products.find(x=>x.id===item.productId);
+
+if(p){
+
+p.stock=Math.max(0,p.stock-item.qty);
+
+}
+
+});
+
+cart=[];
+
+saveData();
+
+updateCartCount();
+
+let whatsappText=
+`*GLAM ATTIRE - NEW ORDER*
+
+Order ID: ${orderId}
+
+*Customer Details*
+Name: ${name}
+Phone: ${phone}
+Alternate Phone: ${phone2 || "N/A"}
+Email: ${email || "N/A"}
+City: ${city}
+Postal Code: ${postal || "N/A"}
+Address: ${address}
+
+*Payment*
+${payment}
+
+*Products*
+${items.map(i=>`• ${i.name} x ${i.qty} = Rs ${i.subtotal.toLocaleString()}`).join("\n")}
+
+*TOTAL: Rs ${total.toLocaleString()}*
+
+Order Note:
+${note || "None"}
+
+Status: Pending`;
+
+let url=
+"https://wa.me/"+WHATSAPP_NUMBER+
+"?text="+encodeURIComponent(whatsappText);
+
+alert(
+"Order successfully placed!\n\nOrder ID: "+
+orderId+
+"\n\nWhatsApp will now open."
+);
+
+closeModal("checkoutModal");
+
+window.open(url,"_blank");
+
+}
+
+function openAdminLogin(){
+
+document.getElementById("adminLoginModal").style.display="block";
+
+}
+
+function adminLogin(){
+
+let username=document.getElementById("adminUsername").value;
+
+let password=document.getElementById("adminPassword").value;
+
+if(username===ADMIN_USERNAME && password===ADMIN_PASSWORD){
+
+sessionStorage.setItem("glamAdmin","true");
+
+closeModal("adminLoginModal");
+
+openAdminPanel();
+
+}else{
+
+document.getElementById("loginError").textContent=
+"Invalid username or password.";
+
+}
+
+}
+
+function openAdminPanel(){
+
+if(sessionStorage.getItem("glamAdmin")!=="true"){
+
+openAdminLogin();
+
+return;
+
+}
+
+document.getElementById("adminModal").style.display="block";
+
+renderAdmin();
+
+}
+
+function adminLogout(){
+
+sessionStorage.removeItem("glamAdmin");
+
+closeModal("adminModal");
+
+}
+
+function renderAdmin(){
+
+document.getElementById("statProducts").textContent=products.length;
+
+document.getElementById("statOrders").textContent=orders.length;
+
+let sales=orders.reduce((sum,o)=>sum+Number(o.total||0),0);
+
+document.getElementById("statSales").textContent=
+"Rs "+sales.toLocaleString();
+
+renderAdminProducts();
+
+renderAdminOrders();
+
+}
+
+function renderAdminProducts(){
+
+let tbody=document.getElementById("adminProducts");
+
+tbody.innerHTML=products.map(p=>`
+
+<tr>
+
+<td>${escapeHtml(p.name)}</td>
+
+<td>${escapeHtml(p.category)}</td>
+
+<td>Rs ${Number(p.price).toLocaleString()}</td>
+
+<td>${p.stock}</td>
+
+<td>
+
+<button class="btn" onclick="editProduct(${p.id})">
+Edit
+</button>
+
+<button class="btn" onclick="deleteProduct(${p.id})">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`).join("");
+
+}
+
+function renderAdminOrders(){
+
+let tbody=document.getElementById("adminOrders");
+
+if(orders.length===0){
+
+tbody.innerHTML=
+"<tr><td colspan='7'>No orders yet.</td></tr>";
+
+return;
+
+}
+
+tbody.innerHTML=orders.map(o=>`
+
+<tr>
+
+<td>${o.id}</td>
+
+<td>${escapeHtml(o.customer.name)}</td>
+
+<td>${escapeHtml(o.customer.phone)}</td>
+
+<td>${escapeHtml(o.customer.city)}</td>
+
+<td>Rs ${Number(o.total).toLocaleString()}</td>
+
+<td>
+
+<select onchange="updateOrderStatus('${o.id}',this.value)">
+
+${["Pending","Confirmed","Packed","Shipped","Delivered","Cancelled"]
+
+.map(status=>
+
+`<option ${o.status===status?"selected":""}>
+${status}
+</option>`
+
+).join("")}
+
+</select>
+
+</td>
+
+<td>
+
+<button class="btn" onclick="viewOrder('${o.id}')">
+View
+</button>
+
+<button class="btn" onclick="deleteOrder('${o.id}')">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`).join("");
+
+}
+
+function updateOrderStatus(id,status){
+
+let order=orders.find(o=>o.id===id);
+
+if(order){
+
+order.status=status;
+
+saveData();
+
+}
+
+}
+
+function viewOrder(id){
+
+let o=orders.find(x=>x.id===id);
+
+if(!o)return;
+
+let productsText=o.items.map(i=>
+`${i.name} × ${i.qty} = Rs ${i.subtotal.toLocaleString()}`
+).join("\n");
+
+alert(
+
+`ORDER DETAILS
+
+Order ID: ${o.id}
+
+Date: ${o.date}
+
+CUSTOMER
+Name: ${o.customer.name}
+Phone: ${o.customer.phone}
+Alternate: ${o.customer.phone2 || "N/A"}
+Email: ${o.customer.email || "N/A"}
+City: ${o.customer.city}
+Postal: ${o.customer.postal || "N/A"}
+Address: ${o.customer.address}
+
+PAYMENT
+${o.payment}
+
+PRODUCTS
+${productsText}
+
+TOTAL
+Rs ${o.total.toLocaleString()}
+
+STATUS
+${o.status}
+
+NOTE
+${o.note || "None"}`
+
+);
+
+}
+
+function deleteOrder(id){
+
+if(!confirm("Delete this order?"))return;
+
+orders=orders.filter(o=>o.id!==id);
+
+saveData();
+
+renderAdmin();
+
+}
+
+function saveProduct(){
+
+let id=document.getElementById("editProductId").value;
+
+let name=document.getElementById("productName").value.trim();
+
+let price=Number(document.getElementById("productPrice").value);
+
+let category=document.getElementById("productCategory").value;
+
+let stock=Number(document.getElementById("productStock").value);
+
+let image=document.getElementById("productImage").value.trim();
+
+let description=document.getElementById("productDescription").value.trim();
+
+if(!name || !price){
+
+alert("Product name and price are required.");
+
+return;
+
+}
+
+if(id){
+
+let p=products.find(x=>x.id===Number(id));
+
+if(p){
+
+p.name=name;
+p.price=price;
+p.category=category;
+p.stock=stock;
+p.image=image;
+p.description=description;
+
+}
+
+}else{
+
+products.push({
+
+id:Date.now(),
+
+name,
+
+price,
+
+category,
+
+stock,
+
+image,
+
+description
+
+});
+
+}
+
+saveData();
+
+clearProductForm();
+
+renderProducts();
+
+renderAdmin();
+
+alert("Product saved successfully.");
+
+}
+
+function editProduct(id){
+
+let p=products.find(x=>x.id===id);
+
+if(!p)return;
+
+document.getElementById("editProductId").value=p.id;
+
+document.getElementById("productName").value=p.name;
+
+document.getElementById("productPrice").value=p.price;
+
+document.getElementById("productCategory").value=p.category;
+
+document.getElementById("productStock").value=p.stock;
+
+document.getElementById("productImage").value=p.image;
+
+document.getElementById("productDescription").value=p.description;
+
+window.scrollTo(0,0);
+
+}
+
+function clearProductForm(){
+
+document.getElementById("editProductId").value="";
+
+document.getElementById("productName").value="";
+
+document.getElementById("productPrice").value="";
+
+document.getElementById("productCategory").value="Men";
+
+document.getElementById("productStock").value="10";
+
+document.getElementById("productImage").value="";
+
+document.getElementById("productDescription").value="";
+
+}
+
+function deleteProduct(id){
+
+if(!confirm("Delete this product?"))return;
+
+products=products.filter(p=>p.id!==id);
+
+cart=cart.filter(c=>products.some(p=>p.id===c.id));
+
+saveData();
+
+renderProducts();
+
+renderAdmin();
+
+}
+
+function closeModal(id){
+
+document.getElementById(id).style.display="none";
+
+}
+
+function scrollToStore(){
+
+document.getElementById("store").scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+function escapeHtml(text){
+
+return String(text??"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+window.onclick=function(e){
+
+document.querySelectorAll(".modal").forEach(modal=>{
+
+if(e.target===modal){
+
+modal.style.display="none";
+
+}
+
+});
+
+};
+
+createDemoProducts();
+
+renderProducts();
+
+updateCartCount();
+
+</script>
+
+</body>
+</html>
